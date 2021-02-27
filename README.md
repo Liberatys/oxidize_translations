@@ -1,5 +1,13 @@
 # Oxidized Translations
 
-**WIP**
-Pushed to reserve the name!
-But intended to be used!
+## Installation
+
+**This crate is WIP, please do not use until version 1.0.0!**
+
+## Usage
+
+## Contributing
+
+## Versioning
+
+## License
