@@ -48,5 +48,6 @@
 )]
 
 mod errors;
+mod config;
 mod reader;
 pub mod oxidized_map;
