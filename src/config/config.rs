@@ -4,9 +4,9 @@
 //!
 //!
 
+use crate::reader::file_reader;
 use std::io::prelude::*;
 use yaml_rust::{Yaml, YamlLoader};
-use crate::reader::file_reader;
 
 ///
 #[derive(Default, Debug, PartialEq)]
@@ -14,6 +14,7 @@ pub struct Configuration {
     pub default_locale: String,
     pub available_locales: Vec<String>,
     pub locale_folder: String,
+    pub fallback_locale: String,
 }
 
 // TODO:
@@ -25,7 +26,16 @@ pub fn extract_config_from_content(config_content: &Yaml) -> Option<Configuratio
     match config_content["default_locale"].as_str() {
         Some(default_locale) => {
             configuration = configuration.default_locale(default_locale.to_string());
-        },
+        }
+        None => {
+            return None;
+        }
+    }
+
+    match config_content["fallback_locale"].as_str() {
+        Some(locale) => {
+            configuration = configuration.fallback_locale(locale.to_string());
+        }
         None => {
             return None;
         }
@@ -34,7 +44,7 @@ pub fn extract_config_from_content(config_content: &Yaml) -> Option<Configuratio
     match config_content["locale_folder"].as_str() {
         Some(locale_folder) => {
             configuration = configuration.locale_folder(locale_folder.to_string());
-        },
+        }
         None => {
             return None;
         }
@@ -43,11 +53,11 @@ pub fn extract_config_from_content(config_content: &Yaml) -> Option<Configuratio
     match config_content["available_locales"].as_vec() {
         Some(available_locales_vec) => {
             let mut available_locales: Vec<String> = Vec::new();
-            for entry in available_locales_vec { 
+            for entry in available_locales_vec {
                 available_locales.push(entry.as_str().unwrap().to_string());
             }
             configuration = configuration.available_locales(available_locales);
-        },
+        }
         None => {
             return None;
         }
@@ -57,13 +67,29 @@ pub fn extract_config_from_content(config_content: &Yaml) -> Option<Configuratio
 }
 
 impl Configuration {
+    pub fn new(
+        default_locale: String,
+        available_locales: Vec<String>,
+        locale_folder: String,
+        fallback_locale: String,
+    ) -> Self {
+        Self {
+            default_locale,
+            available_locales,
+            locale_folder,
+            fallback_locale,
+        }
+    }
+
     pub fn from_str(config_str: String) -> Option<Self> {
         let config_content = &YamlLoader::load_from_str(&config_str).unwrap()[0];
         extract_config_from_content(config_content)
     }
 
     pub fn from_file(file_path: String) -> std::io::Result<Option<Self>> {
-        let config_content = &YamlLoader::load_from_str(&file_reader::FileReader::new(file_path).read()?).unwrap()[0];
+        let config_content =
+            &YamlLoader::load_from_str(&file_reader::FileReader::new(file_path).read()?).unwrap()
+                [0];
         Ok(extract_config_from_content(config_content))
     }
 
@@ -84,6 +110,11 @@ impl Configuration {
         return self;
     }
 
+    pub fn fallback_locale(mut self, locale: String) -> Self {
+        self.fallback_locale = locale;
+        return self;
+    }
+
     pub fn available_locales(mut self, available_locales: Vec<String>) -> Self {
         self.available_locales = available_locales;
         return self;
@@ -98,6 +129,8 @@ mod tests {
     fn test_load_config_from_str_with_valid_data() {
         let config_str = "
                 default_locale: 
+                    en
+                fallback_locale: 
                     en
                 locale_folder:
                     '/folder/path/'

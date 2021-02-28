@@ -33,5 +33,5 @@ pub trait MapInterface {
     /// provided by the Map if  [MapInterface::optional_get] returns None.
     fn enforced_get(&self, key: &str, locale: Option<&str>) -> String;
     /// Load the translations from disk and compile them into the needed data structure.
-    fn load(&mut self);
+    fn load(&mut self) -> std::io::Result<()>;
 }

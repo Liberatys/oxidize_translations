@@ -40,8 +40,10 @@
 // Look into the ruby I18n implementation
 //    - liberatys, Sun Feb 28 16:43:30 2021
 
+#![feature(hash_drain_filter)]
+
 #![deny(
-    missing_docs,
+    // missing_docs,
     trivial_casts,
     trivial_numeric_casts,
     unused_extern_crates,
@@ -51,6 +53,6 @@
 )]
 
 mod errors;
-mod config;
 mod reader;
+pub mod config;
 pub mod oxidized_map;
