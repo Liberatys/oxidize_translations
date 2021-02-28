@@ -7,8 +7,8 @@
 //! 
 //! Configuration can either be solved via inline configuration or reading from a yaml / toml file.
 //! The configuration expects the following values to be supplied:
-//! - fallback_locale: [either a value or -]
 //!   - If '-' is used for the fallback locale, the translation searcher will throw an error rather
+//! - fallback_locale: [either a value or -]
 //!   trying to supply a translation from the fallback language
 //! - translation_folder: path to the locale folder
 //!   - This library is intended to be used for loading translations from a file and thus requires a
@@ -34,6 +34,11 @@
 //!
 //! The different types of locale definitions are tried by the file reader in the given order of
 //! possible ways of defining the locale by file.
+
+// TODO:
+//  
+// Look into the ruby I18n implementation
+//    - liberatys, Sun Feb 28 16:43:30 2021
 
 #![deny(
     missing_docs,
