@@ -23,7 +23,7 @@ pub trait MapInterface {
     /// Load a configuration file and convert it into an OxidizedMap
     fn from_config_file(config_file_path: String) -> Self;
     /// Load a configuration from a Struct that implements  [Read]
-    fn from_config_stream(config_stream: &dyn Read) -> Self;
+    fn from_config_stream(config_stream: &mut dyn Read) -> Self;
     /// Returns an Option for the given Key, if no value is found for the given key it will return
     /// None. Otherwise it will return Some(value). If no Locale is provided the default_locale
     /// will be taken from the configuration for the Map.
@@ -32,4 +32,6 @@ pub trait MapInterface {
     /// returns a message to inform the user/developer that the given key was not found in the data
     /// provided by the Map if  [MapInterface::optional_get] returns None.
     fn enforced_get(&self, key: &str, locale: Option<&str>) -> String;
+    /// Load the translations from disk and compile them into the needed data structure.
+    fn load(&mut self);
 }

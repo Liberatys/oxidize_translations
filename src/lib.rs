@@ -26,12 +26,10 @@
 //! de: [<- on first line of the file]
 //! ```
 //! 2. Locale within the file path. Expected at the second to last position in the file path e.g
-//! ```
+//! ```yml
 //! configs/locales/file_path.de.yml
-//!                           __
 //!
 //! configs/locales/file_path.en.yml
-//!                           __
 //! ```
 //!
 //! The different types of locale definitions are tried by the file reader in the given order of
