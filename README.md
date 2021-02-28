@@ -6,7 +6,7 @@ Allows the developer to work with multiple locales and lookup by key and node ke
 ## Documentation
 
 A prettier documentation for the installation, usage and contributing can be found at:
-[oxidized-translations.liberatnick.ch](oxidized-translations.liberatnick.ch)
+oxidized-translations.liberatnick.ch
 
 ## Installation
 

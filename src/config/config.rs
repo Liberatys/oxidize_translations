@@ -11,9 +11,9 @@ use crate::reader::file_reader;
 ///
 #[derive(Default, Debug, PartialEq)]
 pub struct Configuration {
-    default_locale: String,
-    available_locales: Vec<String>,
-    locale_folder: String,
+    pub default_locale: String,
+    pub available_locales: Vec<String>,
+    pub locale_folder: String,
 }
 
 // TODO:

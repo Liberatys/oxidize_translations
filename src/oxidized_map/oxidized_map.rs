@@ -4,6 +4,7 @@
 use super::interface::MapInterface;
 use crate::config::config;
 use std::io::prelude::*;
+use crate::reader::locale_folder;
 
 /// A Map implementation that contains the loaded translations for the application and implements
 /// the methods needed to load different parts of the translation.
@@ -50,6 +51,6 @@ impl MapInterface for Map {
     }
 
     fn load(&mut self) {
-
+        let _translation_map = locale_folder::LocaleFolder::new(self.configuration.locale_folder.clone());
     }
 }
