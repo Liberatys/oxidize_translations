@@ -13,8 +13,7 @@ pub fn filter_translation_files(
     for (k, v) in translation_map {
         match &v {
             Yaml::Hash(value) => {
-                let locale_definition =
-                    value.keys().next().unwrap().clone().into_string().unwrap();
+                let locale_definition = value.keys().next().unwrap().clone().into_string().unwrap();
                 if locales.contains(&locale_definition) {
                     match locale_map.get_mut(&locale_definition) {
                         None => {

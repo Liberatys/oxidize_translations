@@ -5,7 +5,7 @@
 use std::io::prelude::*;
 
 // TODO:
-// Allow *_get methods to return any Yaml object rather than just a string. Could be used for 
+// Allow *_get methods to return any Yaml object rather than just a string. Could be used for
 // requests where a value is an array rather than just a string.
 // Also if the developer wants to load a node key rather than a leaf.
 //    - liberatys, Sat Feb 27 23:11:17 2021

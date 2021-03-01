@@ -1,12 +1,12 @@
-//! 
+//!
 //!
 //!
 
 use super::file_reader::FileReader;
 use std::collections::HashMap;
 use std::fs;
-use yaml_rust::{Yaml, YamlLoader};
 use std::io;
+use yaml_rust::{Yaml, YamlLoader};
 
 /// A wrapper for loading all files within a folder. Takes a folder path and enables the loading
 /// of the files in the folder into a HashMap containing the folder_path as the key and the parsed
@@ -26,10 +26,10 @@ impl LocaleFolder {
     /// Will return an Err on invalid file path or issues when parsing
     /// the file content of a locale file
     pub fn load(&self) -> io::Result<HashMap<String, Yaml>> {
-        let mut locale_folder_map : HashMap< String, Yaml> = HashMap::new();
+        let mut locale_folder_map: HashMap<String, Yaml> = HashMap::new();
         let file_entries = fs::read_dir(&self.locale_folder_path)?
-        .map(|res| res.map(|e| e.path()))
-        .collect::<Result<Vec<_>, io::Error>>()?;
+            .map(|res| res.map(|e| e.path()))
+            .collect::<Result<Vec<_>, io::Error>>()?;
 
         for file_path in file_entries {
             let str_path = file_path.to_str().unwrap().to_string();
@@ -40,7 +40,7 @@ impl LocaleFolder {
                     // Ignore the return Option, as we don't care about it! There will never in a
                     // normal system be a file with exact same file path!
                     let _ = locale_folder_map.insert(str_path, yaml_content[0].clone());
-                },
+                }
                 Err(error) => {
                     return Err(error);
                 }

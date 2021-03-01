@@ -1,10 +1,10 @@
 //! Oxidized translations is a rust port of the I18n gem.
-//! 
+//!
 //! The purpose of the crate is to supply an easy to use wrapper for translation files
-//! that allows easy access to translations. 
+//! that allows easy access to translations.
 //!
 //! # Configuration
-//! 
+//!
 //! Configuration can either be solved via inline configuration or reading from a yaml / toml file.
 //! The configuration expects the following values to be supplied:
 //!   - If '-' is used for the fallback locale, the translation searcher will throw an error rather
@@ -12,16 +12,16 @@
 //!   trying to supply a translation from the fallback language
 //! - translation_folder: path to the locale folder
 //!   - This library is intended to be used for loading translations from a file and thus requires a
-//!   path to the folder holding the locale files. 
+//!   path to the folder holding the locale files.
 //! - default_locale: the default locale for translations
 //!   - If not other locale is supplied this locale will be used for translations
 //!
 //! # File formats
-//! 
-//! This crate is fairly flexible and limit at the same time! 
+//!
+//! This crate is fairly flexible and limit at the same time!
 //! It allows for files to have multiple ways of declaring a locale which are as follows
 //!
-//! 1. Locale identifier in the form of a leading definition e.g 
+//! 1. Locale identifier in the form of a leading definition e.g
 //! ```yaml
 //! de: [<- on first line of the file]
 //! ```
@@ -36,11 +36,9 @@
 //! possible ways of defining the locale by file.
 
 // TODO:
-//  
+//
 // Look into the ruby I18n implementation
 //    - liberatys, Sun Feb 28 16:43:30 2021
-
-#![feature(hash_drain_filter)]
 
 #![deny(
     // missing_docs,
@@ -52,7 +50,7 @@
     variant_size_differences
 )]
 
-mod errors;
-mod reader;
 pub mod config;
+mod errors;
 pub mod oxidized_map;
+mod reader;
